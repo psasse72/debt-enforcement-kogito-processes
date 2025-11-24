@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.6.6</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <groupId>org.psasse</groupId>
+  <artifactId>crif-kogito-processes</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <description>Generated project crif-kogito-processes</description>
+
+  <properties>
+    <java.version>11</java.version>
+    <kogito.version>1.44.1.Final</kogito.version>
+    <exec.mainClass>org.psasse.KogitoApplication</exec.mainClass>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-spring-boot-bom</artifactId>
+        <version>${kogito.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+       <groupId>org.kie.kogito</groupId>
+       <artifactId>kogito-processes-spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+       <groupId>org.kie.kogito</groupId>
+       <artifactId>kogito-addons-springboot-monitoring-prometheus</artifactId>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+    </dependency>
+ 
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-maven-plugin</artifactId>
+        <version>${kogito.version}</version>
+        <extensions>true</extensions>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>nl.lexemmens</groupId>
+        <artifactId>podman-maven-plugin</artifactId>
+        <version>1.19.0</version>
+        <configuration>
+          <registries>
+            <registry>ghcr.io/psasse72</registry>
+          </registries>
+          <pushRegistry>ghcr.io/psasse72</pushRegistry>
+          <images>
+            <image>
+              <name>debt-enforcement-kogito-processes</name>
+              <build>
+                <createLatestTag>true</createLatestTag>
+                <format>OCI</format>
+              </build>
+            </image>
+          </images>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
