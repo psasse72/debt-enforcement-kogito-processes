@@ -6,6 +6,11 @@ spec:
   selector:
     app: {{ .Chart.Name }}
   ports:
-  - protocol: TCP
+  - name: docs
+    protocol: TCP
     port: 80
     targetPort: 8080
+  - name: appl
+    protocol: TCP
+    port: 8080
+    targetPort: 8090
